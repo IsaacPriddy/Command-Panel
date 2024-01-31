@@ -58,22 +58,36 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/logos/logo.png
+    - assets/logos/logo_15.png
+    - assets/logos/logo_25.png
+    - assets/logos/logo_50.png
 
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware
+    - assets/tokens/command.png
+    - assets/tokens/regular.png
+    - assets/tokens/lieutenant.png
+    - assets/tokens/irregular.png
+    - assets/tokens/impetuous.png
 
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
-
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
+  fonts:
+    - family: Aquire
+      fonts:
+        - asset: assets/fonts/AquireRegular.otf
+        - asset: assets/fonts/AquireLight.otf
+          style: italic
+        - asset: assets/fonts/AquireBold.otf
+          weight: 700
+    - family: Quantum
+      fonts:
+        - asset: assets/fonts/Quantumregular.otf
+    - family: Eunomia
+      fonts:
+        - asset: assets/fonts/Eunomia-Regular.otf
+        - asset: assets/fonts/Eunomia-Light.otf
+          style: italic
+        - asset: assets/fonts/Eunomia-Bold.otf
+          weight: 700
   # fonts:
   #   - family: Schyler
   #     fonts:
