@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/home_screen.dart';
+import 'screens/play_screen.dart';
 /*
   // Official colors and info that I cannot use at this time
     // Tan color: #f8e9d5 rgba(233,220,202,255)
@@ -14,7 +14,7 @@ class MyApp extends StatefulWidget {
 
   static final routes = {
     '/': (context) => const CircularProgressIndicator(),
-    'HomeScreen': (context) => const HomeScreen(),
+    'Play Screen': (context) => const PlayScreen(),
     // Maybe a dice roller for those who want one?
       // Or put it on the play screen as an option
   };
@@ -40,7 +40,7 @@ class AppState extends State<MyApp> {
         )
       ),
       routes: MyApp.routes,
-      initialRoute: 'HomeScreen'
+      initialRoute: 'Play Screen'
     );
   }
 }
