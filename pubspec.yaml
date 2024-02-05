@@ -65,10 +65,15 @@ flutter:
     - assets/logos/logo_50.png
 
     - assets/tokens/command.png
+    - assets/tokens/command_grey.png
     - assets/tokens/regular.png
+    - assets/tokens/regular_grey.png
     - assets/tokens/lieutenant.png
+    - assets/tokens/lieutenant_grey.png
     - assets/tokens/irregular.png
+    - assets/tokens/irregular_grey.png
     - assets/tokens/impetuous.png
+    - assets/tokens/impetuous_grey.png
 
   fonts:
     - family: Aquire
