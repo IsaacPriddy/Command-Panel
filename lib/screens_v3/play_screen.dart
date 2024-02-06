@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'order_toggle_button.dart';
-// import 'set_button.dart';
-
+import 'widgets/order_toggle_button.dart';
+import 'widgets/set_button.dart';
+import 'widgets/common_widgets.dart';
 
 class Orders {
   int commandTokens = 4;
@@ -9,6 +9,16 @@ class Orders {
   int regularOrders = 0;
   int irregularOrders = 0;
   int impetuousOrder = 0;
+
+  Orders();
+
+  Orders.copy(Orders other) {
+    commandTokens = other.commandTokens;
+    lieutenantOrders = other.lieutenantOrders;
+    regularOrders = other.regularOrders;
+    irregularOrders = other.irregularOrders;
+    impetuousOrder = other.impetuousOrder;
+  }
 }
 
 class PlayScreen extends StatefulWidget {
@@ -21,7 +31,6 @@ class PlayScreen extends StatefulWidget {
 
 class _PlayScreenState extends State<PlayScreen> {
   // VARIABLES, INITIALIZERS AND UPPDATERS
-  List<OrderToggleButton> orderToggleButtons = [];
   final List<GlobalKey<OrderToggleButtonState>> _toggleButtonKeys = [];
   final Orders _orders = Orders();
 
@@ -77,78 +86,139 @@ class _PlayScreenState extends State<PlayScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            createButton(h, w, "Set", onPressed: () => ''),
-            resetToggleButtons(h, w, "Reset"),
+            setButton(h, w, context, () {}, _orders, () {setState(() {});}),
+            resetToggleButtons(h, w),
           ],
         ),
         const SizedBox(height: 16.0), // SPACER
         // THE TOGGLE BUTTONS ROW/COLUMNS
-        Row(
-          // TODO: Make the number of columns and toggle buttons dynamic
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Column(
-              children: [
-                lieutenantOrderToggle(),
-                const SizedBox(height: 16.0), // SPACER
-                lieutenantOrderToggle(),
-                const SizedBox(height: 16.0), // SPACER
-                regularOrderToggle(),
-                const SizedBox(height: 16.0), // SPACER
-                regularOrderToggle(),
-                const SizedBox(height: 16.0), // SPACER
-                regularOrderToggle(),
-              ],
-            ),
-            Column(
-              children: [
-                regularOrderToggle(),
-                const SizedBox(height: 16.0), // SPACER
-                regularOrderToggle(),
-                const SizedBox(height: 16.0), // SPACER
-                regularOrderToggle(),
-                const SizedBox(height: 16.0), // SPACER
-                irregularOrderToggle(),
-                const SizedBox(height: 16.0), // SPACER
-                irregularOrderToggle(),
-                const SizedBox(height: 16.0), // SPACER
-                impteuousOrderToggle(),
-                const SizedBox(height: 16.0), // SPACER
-              ],
-            ),                
-          ],
-        ),
+        createToggleColumns(),
         const SizedBox(height: 16.0), // SPACER
+        Column(
+          // TODO: Delete this once SET is working
+          children: [
+            Text("Current number of Lieutenant orders: ${_orders.lieutenantOrders}"),
+            Text("Current number of Regular orders: ${_orders.regularOrders}"),
+            Text("Current number of Irregular orders: ${_orders.irregularOrders}"),
+            Text("Current number of Impetuous orders: ${_orders.impetuousOrder}"),
+          ],
+        )
       ],
     );
   }
 
-  // OTHER FUNCTIONS
-  Widget createButton(double h, double w, String buttonText, {void Function()? onPressed}) {
-    return ElevatedButton(
-      onPressed: onPressed, 
-      style: ElevatedButton.styleFrom(
-        fixedSize: Size(h * 0.18, w * 0.10),
-        padding: EdgeInsets.all(w * 0.0234), // was 16
-        shape: RoundedRectangleBorder(
-          side: BorderSide(color: Colors.amber.shade50, width: 0.5),
-          borderRadius: BorderRadius.circular(10),
+  Widget createToggleColumns() {
+    /*
+    double columnMath = 
+      (_orders.lieutenantOrders + 
+      _orders.regularOrders + 
+      _orders.irregularOrders + 
+      _orders.impetuousOrder) / 2;
+    int totalOrdersPerColumn = columnMath.ceil();
+    */
+    
+    // TODO: create a for loop the creates a number of buttons per row equal to totalOrdersPerColumn
+    // May have to be two for loops or a nested for loop
+    // 8 is the max (on test phone) that I can have per column
+    // Able to have 4 columns wide comfortably
+
+    return Row(
+      // TODO: Make the number of columns and toggle buttons dynamic
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Column(
+          children: [
+            commandTokensToggle(),
+            const SizedBox(height: 16.0), // SPACER
+            commandTokensToggle(),
+            const SizedBox(height: 16.0), // SPACER
+            lieutenantOrderToggle(),
+            const SizedBox(height: 16.0), // SPACER
+            lieutenantOrderToggle(),
+            const SizedBox(height: 16.0), // SPACER
+            regularOrderToggle(),
+            const SizedBox(height: 16.0), // SPACER
+            regularOrderToggle(),
+            /*
+            const SizedBox(height: 16.0), // SPACER
+            regularOrderToggle(),
+            const SizedBox(height: 16.0), // SPACER
+            regularOrderToggle(),
+            */
+          ],
         ),
-        foregroundColor: Colors.black,
-        backgroundColor: Colors.blueGrey.shade200,
-        textStyle: const TextStyle(
-          fontSize: 18,
-          color: Colors.black,
-          fontFamily: 'Aquire',
+        Column(
+          children: [
+            regularOrderToggle(),
+            const SizedBox(height: 16.0), // SPACER
+            regularOrderToggle(),
+            const SizedBox(height: 16.0), // SPACER
+            regularOrderToggle(),
+            const SizedBox(height: 16.0), // SPACER
+            regularOrderToggle(),
+            const SizedBox(height: 16.0), // SPACER
+            regularOrderToggle(),
+            const SizedBox(height: 16.0), // SPACER
+            regularOrderToggle(),
+            /*
+            const SizedBox(height: 16.0), // SPACER
+            regularOrderToggle(),
+            const SizedBox(height: 16.0), // SPACER
+            regularOrderToggle(),
+            */
+          ],
         ),
-      ),
-      child: Text(buttonText)
+        Column(
+          children: [
+            regularOrderToggle(),
+            const SizedBox(height: 16.0), // SPACER
+            regularOrderToggle(),
+            const SizedBox(height: 16.0), // SPACER
+            regularOrderToggle(),
+            const SizedBox(height: 16.0), // SPACER
+            regularOrderToggle(),
+            const SizedBox(height: 16.0), // SPACER
+            regularOrderToggle(),
+            const SizedBox(height: 16.0), // SPACER
+            regularOrderToggle(),
+            /*
+            const SizedBox(height: 16.0), // SPACER
+            regularOrderToggle(),
+            const SizedBox(height: 16.0), // SPACER
+            regularOrderToggle(),
+            */
+          ],
+        ),
+        Column(
+          children: [
+            regularOrderToggle(),
+            const SizedBox(height: 16.0), // SPACER
+            regularOrderToggle(),
+            const SizedBox(height: 16.0), // SPACER
+            regularOrderToggle(),
+            const SizedBox(height: 16.0), // SPACER
+            regularOrderToggle(),
+            const SizedBox(height: 16.0), // SPACER
+            regularOrderToggle(),
+            const SizedBox(height: 16.0), // SPACER
+            regularOrderToggle(),
+            /*
+            const SizedBox(height: 16.0), // SPACER
+            regularOrderToggle(),
+            const SizedBox(height: 16.0), // SPACER
+            regularOrderToggle(),
+            */
+          ],
+        ),
+      ],
     );
   }
 
-  Widget resetToggleButtons(double h, double w, String buttonText) {
-    return createButton(
-      h, w, buttonText,
+  // RESET
+  Widget resetToggleButtons(double h, double w) {
+    CommonWidgets commonWidgets = CommonWidgets(); // For the button style, cuts down on code
+    
+    return ElevatedButton(
       onPressed: () {
         setState(() {
           for (var key in _toggleButtonKeys) {
@@ -161,11 +231,25 @@ class _PlayScreenState extends State<PlayScreen> {
           _orders.irregularOrders = 0;
           _orders.impetuousOrder = 0;
         });
-      }
+      }, 
+      style: commonWidgets.customButtonStyle(height: h, width: w),
+      child: const Text('Reset')
     );
   }
 
   // ORDER BUTTONS
+  Widget commandTokensToggle() {
+    OrderToggleButton toggleButton = OrderToggleButton(
+      defaultValue: true,
+      normalImage: "assets/tokens/command.png",
+      greyImage: "assets/tokens/command_grey.png",
+      orderType: OrderType.Lieutenant,
+      backgroundColor: Colors.purple.shade800,
+    );
+
+    return toggleButton;
+  }
+
   Widget lieutenantOrderToggle() {
     OrderToggleButton toggleButton = OrderToggleButton(
       key: GlobalKey<OrderToggleButtonState>(), // Add key here
@@ -225,5 +309,4 @@ class _PlayScreenState extends State<PlayScreen> {
 
     return toggleButton;
   }
-
 }

@@ -2,7 +2,55 @@ import 'package:flutter/material.dart';
 
 
 // ignore: constant_identifier_names
-enum OrderType { Regular, Lieutenant, Irregular, Impetuous }
+enum OrderType { CommandToken, Regular, Lieutenant, Irregular, Impetuous }
+
+extension OrderTypeExtension on OrderType {
+  String get imagePath {
+    switch (this) {
+      case OrderType.CommandToken:
+        return "assets/tokens/command.png";
+      case OrderType.Lieutenant:
+        return "assets/tokens/lieutenant.png";
+      case OrderType.Regular:
+        return "assets/tokens/regular.png";
+      case OrderType.Irregular:
+        return "assets/tokens/irregular.png";
+      case OrderType.Impetuous:
+        return "assets/tokens/impetuous.png";
+    }
+  }
+
+  String get greyImagePath {
+    switch (this) {
+      case OrderType.CommandToken:
+        return "assets/tokens/command_grey.png";
+      case OrderType.Lieutenant:
+        return "assets/tokens/lieutenant_grey.png";
+      case OrderType.Regular:
+        return "assets/tokens/regular_grey.png";
+      case OrderType.Irregular:
+        return "assets/tokens/irregular_grey.png";
+      case OrderType.Impetuous:
+        return "assets/tokens/impetuous_grey.png";
+    }
+  }
+
+  Color get backgroundColor {
+    switch (this) {
+      case OrderType.CommandToken:
+        return Colors.purple.shade800;
+      case OrderType.Lieutenant:
+        return Colors.blue.shade800;
+      case OrderType.Regular:
+        return Colors.green.shade800;
+      case OrderType.Irregular:
+        return Colors.yellow.shade800;
+      case OrderType.Impetuous:
+        return Colors.red.shade800;
+    }
+  }
+}
+
 
 class OrderToggleButton extends StatefulWidget {
   // Add necessary parameters for your toggle button
