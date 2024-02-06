@@ -14,7 +14,7 @@ class MyApp extends StatefulWidget {
 
   static final routes = {
     '/': (context) => const CircularProgressIndicator(),
-    'Play Screen': (context) => PlayScreen(),
+    'Play Screen': (context) => const PlayScreen(),
     // Maybe a dice roller for those who want one?
       // Or put it on the play screen as an option
   };

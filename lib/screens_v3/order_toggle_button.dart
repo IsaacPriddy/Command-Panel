@@ -1,20 +1,28 @@
 import 'package:flutter/material.dart';
 
+
+// ignore: constant_identifier_names
+enum OrderType { Regular, Lieutenant, Irregular, Impetuous }
+
 class OrderToggleButton extends StatefulWidget {
   // Add necessary parameters for your toggle button
   final bool defaultValue;
   final String normalImage;
   final String greyImage;
+  final OrderType orderType;
   final ValueChanged<bool>? onChanged;
 
-  const OrderToggleButton({super.key, 
+  const OrderToggleButton({
+    super.key, 
     required this.defaultValue,
     required this.normalImage,
     required this.greyImage,
+    required this.orderType,
     this.onChanged,
   });
 
   @override
+  // ignore: library_private_types_in_public_api
   _OrderToggleButtonState createState() => _OrderToggleButtonState();
 }
 
@@ -80,4 +88,5 @@ class _OrderToggleButtonState extends State<OrderToggleButton> {
       ),
     );
   }
+
 }

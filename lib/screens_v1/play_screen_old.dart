@@ -10,6 +10,7 @@ class Orders{
   int impetuousOrder = 0;
 }
 
+// ignore: constant_identifier_names
 enum OrderType { Regular, Lieutenant, Irregular, Impetuous }
 
 class PlayScreen extends StatefulWidget {
@@ -86,7 +87,6 @@ class PlayScreenState extends State<PlayScreen> {
                 )
               ]
             ),
-            // TODO: Fix below
             const SizedBox(height: 16.0), // SPACER
             Column(
               mainAxisAlignment: MainAxisAlignment.center,

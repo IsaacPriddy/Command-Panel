@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SetButton extends StatelessWidget {
+  const SetButton({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -10,21 +12,23 @@ class SetButton extends StatelessWidget {
           context: context,
           builder: (BuildContext context) {
             // Return your custom set screen or popup widget
-            return SetScreen();
+            return const SetScreen();
           },
         );
       },
-      child: Text('Set'),
+      child: const Text('Set'),
     );
   }
 }
 
 class SetScreen extends StatelessWidget {
+  const SetScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     // Build your set screen UI here
     return AlertDialog(
-      title: Text('Set Orders'),
+      title: const Text('Set Orders'),
       content: const Column(
         // Add UI elements for regular, lieutenant, irregular, and impetuous orders
       ),
@@ -35,14 +39,14 @@ class SetScreen extends StatelessWidget {
             // You may need to pass data back to PlayScreen
             Navigator.pop(context);
           },
-          child: Text('Set'),
+          child: const Text('Set'),
         ),
         ElevatedButton(
           onPressed: () {
             // Handle close button press
             Navigator.pop(context);
           },
-          child: Text('Close'),
+          child: const Text('Close'),
         ),
       ],
     );

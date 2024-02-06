@@ -1,14 +1,6 @@
 import 'package:flutter/material.dart';
 import 'order_toggle_button.dart';
-
-
-class Orders {
-  int commandTokens = 4;
-  int lieutenantOrders = 0;
-  int regularOrders = 0;
-  int irregularOrders = 0;
-  int impetuousOrder = 0;
-}
+import 'orders.dart';
 
 class PlayScreen extends StatefulWidget {
   const PlayScreen({super.key});
@@ -20,6 +12,7 @@ class PlayScreen extends StatefulWidget {
 
 class _PlayScreenState extends State<PlayScreen> {
   List<OrderToggleButton> orderToggleButtons = [];
+  final Orders _orders = Orders(); // FOR TESTING TODO: Remove later
 
   @override
   Widget build(BuildContext context) {
@@ -64,31 +57,40 @@ class _PlayScreenState extends State<PlayScreen> {
         ),
         const SizedBox(height: 16.0), // SPACER
         // THE TOGGLE BUTTONS ROW/COLUMNS
-        const Row(
+        Row(
           // TODO: Make the number of columns and toggle buttons dynamic
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Column(
               children: [
-                OrderToggleButton(defaultValue: true, normalImage: "assets/tokens/regular.png", greyImage: "assets/tokens/regular_grey.png",),
-                SizedBox(height: 16.0), // SPACER
-                OrderToggleButton(defaultValue: true, normalImage: "assets/tokens/regular.png", greyImage: "assets/tokens/regular_grey.png",),
-                SizedBox(height: 16.0), // SPACER
-                OrderToggleButton(defaultValue: true, normalImage: "assets/tokens/regular.png", greyImage: "assets/tokens/regular_grey.png",),
+                regularOrderToggle(),
+                const SizedBox(height: 16.0), // SPACER
+                regularOrderToggle(),
+                const SizedBox(height: 16.0), // SPACER
+                regularOrderToggle(),
               ],
             ),
             Column(
               children: [
-                OrderToggleButton(defaultValue: true, normalImage: "assets/tokens/regular.png", greyImage: "assets/tokens/regular_grey.png",),
-                SizedBox(height: 16.0), // SPACER
-                OrderToggleButton(defaultValue: true, normalImage: "assets/tokens/regular.png", greyImage: "assets/tokens/regular_grey.png",),
-                SizedBox(height: 16.0), // SPACER
-                OrderToggleButton(defaultValue: true, normalImage: "assets/tokens/regular.png", greyImage: "assets/tokens/regular_grey.png",),
+                regularOrderToggle(),
+                const SizedBox(height: 16.0), // SPACER
+                regularOrderToggle(),
+                const SizedBox(height: 16.0), // SPACER
+                regularOrderToggle(),
               ],
             ),                
           ],
         ),
         const SizedBox(height: 16.0), // SPACER
+        Column(
+          children: [
+            Text("The current lieutenantOrders: ${_orders.lieutenantOrders}"),
+            Text("The current regularOrders: ${_orders.regularOrders}"),
+            Text("The current irregularOrders: ${_orders.irregularOrders}"),
+            Text("The current impetuousOrder: ${_orders.impetuousOrder}"),
+          ],
+        ),
+        createButton(h*2, w, "Add Regular", onPressed: addRegularOrder) // NOT CURRENTLY WORKING TODO: Remove
       ],
     );
   }
@@ -116,4 +118,19 @@ class _PlayScreenState extends State<PlayScreen> {
     );
   }
 
+  Widget regularOrderToggle() {
+    return const OrderToggleButton(
+      defaultValue: true,
+      normalImage: "assets/tokens/regular.png",
+      greyImage: "assets/tokens/regular_grey.png",
+      orderType: OrderType.Regular,
+    );
+  }
+
+  // TODO: Remove this when Add Regular button is removed
+  void addRegularOrder() {
+    setState(() {
+      _orders.regularOrders++;
+    });
+  }
 }
