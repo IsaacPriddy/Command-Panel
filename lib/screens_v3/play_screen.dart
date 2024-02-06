@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 import 'order_toggle_button.dart';
-import 'orders.dart';
+// import 'set_button.dart';
+
+
+class Orders {
+  int commandTokens = 4;
+  int lieutenantOrders = 0;
+  int regularOrders = 0;
+  int irregularOrders = 0;
+  int impetuousOrder = 0;
+}
 
 class PlayScreen extends StatefulWidget {
   const PlayScreen({super.key});
@@ -11,9 +20,26 @@ class PlayScreen extends StatefulWidget {
 }
 
 class _PlayScreenState extends State<PlayScreen> {
+  // VARIABLES, INITIALIZERS AND UPPDATERS
   List<OrderToggleButton> orderToggleButtons = [];
-  final Orders _orders = Orders(); // FOR TESTING TODO: Remove later
+  final List<GlobalKey<OrderToggleButtonState>> _toggleButtonKeys = [];
+  final Orders _orders = Orders();
 
+  void updateToggleKeys() {
+    _toggleButtonKeys.clear();
+    _toggleButtonKeys.addAll(List.generate(
+      _orders.regularOrders,
+      (index) => GlobalKey<OrderToggleButtonState>(),
+    ));
+  }
+  
+  @override
+  void initState() {
+    super.initState();
+    updateToggleKeys();
+  }
+
+  // THE BUILD
   @override
   Widget build(BuildContext context) {
     // These are here so that the size dynamically changes with the size of the phone
@@ -52,7 +78,7 @@ class _PlayScreenState extends State<PlayScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             createButton(h, w, "Set", onPressed: () => ''),
-            createButton(h, w, "Reset", onPressed: () => ''),
+            resetToggleButtons(h, w, "Reset"),
           ],
         ),
         const SizedBox(height: 16.0), // SPACER
@@ -63,6 +89,10 @@ class _PlayScreenState extends State<PlayScreen> {
           children: [
             Column(
               children: [
+                lieutenantOrderToggle(),
+                const SizedBox(height: 16.0), // SPACER
+                lieutenantOrderToggle(),
+                const SizedBox(height: 16.0), // SPACER
                 regularOrderToggle(),
                 const SizedBox(height: 16.0), // SPACER
                 regularOrderToggle(),
@@ -77,20 +107,18 @@ class _PlayScreenState extends State<PlayScreen> {
                 regularOrderToggle(),
                 const SizedBox(height: 16.0), // SPACER
                 regularOrderToggle(),
+                const SizedBox(height: 16.0), // SPACER
+                irregularOrderToggle(),
+                const SizedBox(height: 16.0), // SPACER
+                irregularOrderToggle(),
+                const SizedBox(height: 16.0), // SPACER
+                impteuousOrderToggle(),
+                const SizedBox(height: 16.0), // SPACER
               ],
             ),                
           ],
         ),
         const SizedBox(height: 16.0), // SPACER
-        Column(
-          children: [
-            Text("The current lieutenantOrders: ${_orders.lieutenantOrders}"),
-            Text("The current regularOrders: ${_orders.regularOrders}"),
-            Text("The current irregularOrders: ${_orders.irregularOrders}"),
-            Text("The current impetuousOrder: ${_orders.impetuousOrder}"),
-          ],
-        ),
-        createButton(h*2, w, "Add Regular", onPressed: addRegularOrder) // NOT CURRENTLY WORKING TODO: Remove
       ],
     );
   }
@@ -118,19 +146,84 @@ class _PlayScreenState extends State<PlayScreen> {
     );
   }
 
+  Widget resetToggleButtons(double h, double w, String buttonText) {
+    return createButton(
+      h, w, buttonText,
+      onPressed: () {
+        setState(() {
+          for (var key in _toggleButtonKeys) {
+            key.currentState?.reset();
+          }
+
+          _orders.commandTokens = 4;
+          _orders.regularOrders = 0;
+          _orders.lieutenantOrders = 0;
+          _orders.irregularOrders = 0;
+          _orders.impetuousOrder = 0;
+        });
+      }
+    );
+  }
+
+  // ORDER BUTTONS
+  Widget lieutenantOrderToggle() {
+    OrderToggleButton toggleButton = OrderToggleButton(
+      key: GlobalKey<OrderToggleButtonState>(), // Add key here
+      defaultValue: true,
+      normalImage: "assets/tokens/lieutenant.png",
+      greyImage: "assets/tokens/lieutenant_grey.png",
+      orderType: OrderType.Lieutenant,
+      backgroundColor: Colors.blue.shade800,
+    );
+
+    _toggleButtonKeys.add(GlobalKey<OrderToggleButtonState>()); // Add key to the list
+
+    return toggleButton;
+  }
+
   Widget regularOrderToggle() {
-    return const OrderToggleButton(
+    OrderToggleButton toggleButton = OrderToggleButton(
+      key: GlobalKey<OrderToggleButtonState>(), // Add key here
       defaultValue: true,
       normalImage: "assets/tokens/regular.png",
       greyImage: "assets/tokens/regular_grey.png",
       orderType: OrderType.Regular,
+      backgroundColor: Colors.green.shade800,
     );
+
+    _toggleButtonKeys.add(GlobalKey<OrderToggleButtonState>()); // Add key to the list
+
+    return toggleButton;
   }
 
-  // TODO: Remove this when Add Regular button is removed
-  void addRegularOrder() {
-    setState(() {
-      _orders.regularOrders++;
-    });
+  Widget irregularOrderToggle() {
+    OrderToggleButton toggleButton = OrderToggleButton(
+      key: GlobalKey<OrderToggleButtonState>(), // Add key here
+      defaultValue: true,
+      normalImage: "assets/tokens/irregular.png",
+      greyImage: "assets/tokens/irregular_grey.png",
+      orderType: OrderType.Irregular,
+      backgroundColor: Colors.yellow.shade800,
+    );
+
+    _toggleButtonKeys.add(GlobalKey<OrderToggleButtonState>()); // Add key to the list
+
+    return toggleButton;
   }
+
+  Widget impteuousOrderToggle() {
+    OrderToggleButton toggleButton = OrderToggleButton(
+      key: GlobalKey<OrderToggleButtonState>(), // Add key here
+      defaultValue: true,
+      normalImage: "assets/tokens/impetuous.png",
+      greyImage: "assets/tokens/impetuous_grey.png",
+      orderType: OrderType.Impetuous,
+      backgroundColor: Colors.red.shade800,
+    );
+
+    _toggleButtonKeys.add(GlobalKey<OrderToggleButtonState>()); // Add key to the list
+
+    return toggleButton;
+  }
+
 }

@@ -10,29 +10,44 @@ class OrderToggleButton extends StatefulWidget {
   final String normalImage;
   final String greyImage;
   final OrderType orderType;
+  final Color backgroundColor;
   final ValueChanged<bool>? onChanged;
 
   const OrderToggleButton({
-    super.key, 
+    Key? key,
     required this.defaultValue,
     required this.normalImage,
     required this.greyImage,
     required this.orderType,
+    required this.backgroundColor,
     this.onChanged,
-  });
+  }) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
-  _OrderToggleButtonState createState() => _OrderToggleButtonState();
+  OrderToggleButtonState createState() => OrderToggleButtonState();
 }
 
-class _OrderToggleButtonState extends State<OrderToggleButton> {
-  bool isToggled = false;
+class OrderToggleButtonState extends State<OrderToggleButton> {
+  bool isToggled = false; // Is later set by defaultValue
 
   @override
   void initState() {
     super.initState();
     isToggled = widget.defaultValue;
+  }
+
+  @override
+  void didUpdateWidget(covariant OrderToggleButton oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.defaultValue != widget.defaultValue) {
+      isToggled = widget.defaultValue;
+    }
+  }
+
+  void reset() {
+    setState(() {
+      isToggled = widget.defaultValue;
+    });
   }
 
   @override
@@ -61,7 +76,7 @@ class _OrderToggleButtonState extends State<OrderToggleButton> {
                 height: 40.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.0),
-                  color: isToggled ? Colors.green[800] : Colors.grey.shade700,
+                  color: isToggled ? widget.backgroundColor : Colors.grey.shade700,
                 ),
               ),
             ),
@@ -72,7 +87,7 @@ class _OrderToggleButtonState extends State<OrderToggleButton> {
                 height: 40.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.0),
-                  color: isToggled ? Colors.green[800] : Colors.grey.shade700,
+                  color: isToggled ? widget.backgroundColor : Colors.grey.shade700,
                 ),
                 child: Center(
                   child: Image.asset(
@@ -88,5 +103,4 @@ class _OrderToggleButtonState extends State<OrderToggleButton> {
       ),
     );
   }
-
 }
