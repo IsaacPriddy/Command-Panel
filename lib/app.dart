@@ -34,7 +34,7 @@ class AppState extends State<MyApp> {
         scaffoldBackgroundColor: Colors.white,
         textTheme: const TextTheme(
           titleLarge: TextStyle(
-            fontFamily: 'Aquire',
+            fontFamily: 'Elnath',
             fontSize: 24.0, 
           ), // What the appbar uses by default
         )

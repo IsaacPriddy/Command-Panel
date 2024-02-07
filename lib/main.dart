@@ -7,7 +7,10 @@ void main() {
 
 // TODO LIST
 //  1. Get a 1024x1024 icon to replace the background image and be used for the logo/phone icon
-//  2. Replace the font to something that is actually available for commercial use
+//    - Current idea is a box with rounded edges, some circles that look like Toggle in them
+//      and maybe the words command panel slapped over top them.
+//  2. (DONE) Replace the font to something that is actually available for commercial use
+//    - Not sure if I am happy with the new elnath font for now, but it'll do for the time being
 //  3. (DONE) Create a sidescroll for if the user maxes out their orders
 //  4. Remove the plus and minus button and instead of a field users can type into
 //      the plus and minus buttons are annoying to continuously tap...

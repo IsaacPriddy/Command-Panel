@@ -149,7 +149,7 @@ class _SetScreenState extends State<_SetScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text("$orderType: "),
+        Text("$orderType: ", style: commonWidgets.customTextStyle()),
         Row(
           children: [
             // THE MINUS BUTTON
