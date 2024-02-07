@@ -8,9 +8,10 @@ void main() {
 // TODO LIST
 //  1. Get a 1024x1024 icon to replace the background image and be used for the logo/phone icon
 //  2. Replace the font to something that is actually available for commercial use
-//  3. Create a sidescroll for if the user maxes out their orders
+//  3. (DONE) Create a sidescroll for if the user maxes out their orders
 //  4. Remove the plus and minus button and instead of a field users can type into
 //      the plus and minus buttons are annoying to continuously tap...
+//      - Tried a tap in field, it sucked. On the plus side, fixed a bug with the popup screen
 
 //  NOTES:
 //  1. Currently have it set so that if there are no orders then there will be no command tokens

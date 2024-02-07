@@ -73,7 +73,8 @@ class _PlayScreenState extends State<PlayScreen> {
       ),
       bottomNavigationBar: Container(
         // Here to be used for whatever I might need in the future
-        height: screenHeight * 0.0878, // was 60.0
+        decoration: BoxDecoration(color: Colors.blueGrey.shade500),
+        height: screenHeight * 0.08,
       ),
     );
   }
@@ -87,25 +88,13 @@ class _PlayScreenState extends State<PlayScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            setButton(h, w, context, () {}, _orders, () {setState(() {});}),
-            resetToggleButtons(h, w),
+            setButton(h*0.8, w, context, () {}, _orders, () {setState(() {});}),
+            resetToggleButtons(h*0.8, w),
           ],
         ),
         const SizedBox(height: 16.0), // SPACER
         // THE TOGGLE BUTTONS ROW/COLUMNS
         createToggleColumns(),
-        /*
-        const SizedBox(height: 16.0), // SPACER
-        Column(
-          // TODO: Delete this once SET is working
-          children: [
-            Text("Current number of Lieutenant orders: ${_orders.lieutenantOrders}"),
-            Text("Current number of Regular orders: ${_orders.regularOrders}"),
-            Text("Current number of Irregular orders: ${_orders.irregularOrders}"),
-            Text("Current number of Impetuous orders: ${_orders.impetuousOrder}"),
-          ],
-        )
-        */
       ],
     );
   }
@@ -153,13 +142,15 @@ class _PlayScreenState extends State<PlayScreen> {
     }
     
 
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: columns,
-      ),
+    return Scrollbar(
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: columns,
+        ),
+      )
     );
   }
 

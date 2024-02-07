@@ -100,6 +100,9 @@ class OrderToggleButtonState extends State<OrderToggleButton> {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -108,8 +111,9 @@ class OrderToggleButtonState extends State<OrderToggleButton> {
         });
       },
       child: Container(
-        width: 90.0,
-        height: 40.0,
+        // SIZE OF BUTTON OVERALL
+        width: screenWidth * 0.20,  // was 90
+        height: screenHeight * 0.064, // was 40
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20.0),
           color: Colors.grey,
@@ -120,28 +124,31 @@ class OrderToggleButtonState extends State<OrderToggleButton> {
               left: 0.0,
               right: 0.0,
               child: Container(
-                width: 90.0,
-                height: 40.0,
+                // SIZE OF UNDER BUTTON
+                width: screenWidth * 0.2,  // was 90
+                height: screenHeight * 0.064, // was 40
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.0),
-                  color: isToggled ? widget.backgroundColor : Colors.grey.shade700,
+                  color: isToggled ? widget.backgroundColor : Colors.grey.shade700, // MAKES THE WHOLE BACKGROUND OF IMAGE SAME COLOR
                 ),
               ),
             ),
             Positioned(
-              left: isToggled ? 0.0 : 45.0,
+              left: isToggled ? 0.0 : screenWidth * 0.1, // was 45
               child: Container(
-                width: 45.0,
-                height: 40.0,
+                // SIZE OF SPACE AROUND IMAGE
+                width: screenWidth * 0.1,  // was 45
+                height: screenHeight * 0.064, // was 40
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.0),
                   color: isToggled ? widget.backgroundColor : Colors.grey.shade700,
                 ),
                 child: Center(
                   child: Image.asset(
+                    // IMAGE SIZE
                     isToggled ? widget.normalImage : widget.greyImage,
-                    width: 30.0,
-                    height: 30.0,
+                    width: screenWidth * 0.09,  // was 30
+                    height: screenHeight * 0.09, // was 30
                   ),
                 ),
               ),

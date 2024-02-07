@@ -11,6 +11,7 @@ ElevatedButton setButton(double h, double w, BuildContext context, VoidCallback 
       // Display the SetScreen with orders data
       showDialog(
         context: context,
+        barrierDismissible: false,
         builder: (BuildContext context) {
           return _SetScreen(
             orders: orders,
@@ -58,10 +59,10 @@ class _SetScreenState extends State<_SetScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         // Display the number of orders for each type
         children: [
-          buildOrderRow("Lieutenant Orders", widget.orders.lieutenantOrders),
-          buildOrderRow("Regular Orders", widget.orders.regularOrders),
-          buildOrderRow("Irregular Orders", widget.orders.irregularOrders),
-          buildOrderRow("Impetuous Orders", widget.orders.impetuousOrder),
+          buildOrderRow("Lieutenant Orders", widget.orders.lieutenantOrders, 4),
+          buildOrderRow("Regular Orders", widget.orders.regularOrders, 15),
+          buildOrderRow("Irregular Orders", widget.orders.irregularOrders, 15),
+          buildOrderRow("Impetuous Orders", widget.orders.impetuousOrder, 15),
         ],
       ),
       actions: [
@@ -78,6 +79,17 @@ class _SetScreenState extends State<_SetScreen> {
                   widget.orders.regularOrders = 0;
                   widget.orders.irregularOrders = 0;
                   widget.orders.impetuousOrder = 0;
+
+                  // Show a temporary dialog to indicate the button was presed
+                  showDialog(
+                    context: context, 
+                    builder: (BuildContext context) {
+                      return const AlertDialog(
+                        title: Text("Orders Reset"),
+                        content: Text("Orders have been reset. Tap set to save changes\n\n\nTap anywhere to close...")
+                      );
+                    }
+                  );
                 });
               },
               style: commonWidgets.customButtonStyle(height: screenWidth * 0.2),
@@ -133,7 +145,7 @@ class _SetScreenState extends State<_SetScreen> {
     );
   }
 
-  Widget buildOrderRow(String orderType, int orderCount) {
+  Widget buildOrderRow(String orderType, int orderCount, int maxOrders) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
