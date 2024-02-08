@@ -62,14 +62,14 @@ class OrderToggleButton extends StatefulWidget {
   final ValueChanged<bool>? onChanged;
 
   const OrderToggleButton({
-    Key? key,
+    super.key,
     required this.defaultValue,
     required this.normalImage,
     required this.greyImage,
     required this.orderType,
     required this.backgroundColor,
     this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   OrderToggleButtonState createState() => OrderToggleButtonState();

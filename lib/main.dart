@@ -12,9 +12,11 @@ void main() {
 //  2. (DONE) Replace the font to something that is actually available for commercial use
 //    - Not sure if I am happy with the new elnath font for now, but it'll do for the time being
 //  3. (DONE) Create a sidescroll for if the user maxes out their orders
-//  4. Remove the plus and minus button and instead of a field users can type into
+//  4. (FAILED) Remove the plus and minus button and instead of a field users can type into
 //      the plus and minus buttons are annoying to continuously tap...
 //      - Tried a tap in field, it sucked. On the plus side, fixed a bug with the popup screen
+//  5. Make it so that the state of the app is saved when the app is closed and opened again
+//  6. Connect the AD service thing to my bottom appbar
 
 //  NOTES:
 //  1. Currently have it set so that if there are no orders then there will be no command tokens

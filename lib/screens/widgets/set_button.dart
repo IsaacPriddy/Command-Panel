@@ -30,10 +30,9 @@ class _SetScreen extends StatefulWidget {
   final Function()? onSetPressed;
 
   const _SetScreen({
-    Key? key, 
     required this.orders, 
     this.onSetPressed
-  }) : super(key: key);
+  });
 
   @override
   _SetScreenState createState() => _SetScreenState();

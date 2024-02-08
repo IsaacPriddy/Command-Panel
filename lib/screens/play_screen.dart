@@ -33,7 +33,13 @@ class PlayScreen extends StatefulWidget {
 class _PlayScreenState extends State<PlayScreen> {
   // VARIABLES, INITIALIZERS AND UPPDATERS
   final List<GlobalKey<OrderToggleButtonState>> _toggleButtonKeys = [];
-  final Orders _orders = Orders();  // Creates a copy of the default orders
+  Orders _orders = Orders();  // Creates a copy of the default orders
+  
+  @override
+  void initState() {
+    super.initState();
+    updateToggleKeys();
+  }
 
   void updateToggleKeys() {
     _toggleButtonKeys.clear();
@@ -41,12 +47,6 @@ class _PlayScreenState extends State<PlayScreen> {
       _orders.regularOrders,
       (index) => GlobalKey<OrderToggleButtonState>(),
     ));
-  }
-  
-  @override
-  void initState() {
-    super.initState();
-    updateToggleKeys();
   }
 
   // THE BUILD
