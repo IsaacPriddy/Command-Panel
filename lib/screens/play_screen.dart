@@ -94,7 +94,20 @@ class _PlayScreenState extends State<PlayScreen> {
           ],
         ),
         const SizedBox(height: 16.0), // SPACER
+        // THE COMMAND TOKENS
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            for (int index = 0; index < _orders.commandTokens; index++)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: commandTokensToggle(),
+            ),
+          ],
+        ),
+        Divider(thickness: 4.0,indent: 16.0, endIndent: 16.0, color: Colors.blueGrey.shade200,), // WAS const SizedBox(height: 16.0),
         // THE TOGGLE BUTTONS ROW/COLUMNS
+        // createToggleRows(), 
         createToggleColumns(),
       ],
     );
@@ -102,16 +115,17 @@ class _PlayScreenState extends State<PlayScreen> {
 
   // TOGGLE BUTTONS
   Widget createToggleColumns() {
+    int tokensPerColumn = 7;  // If there is 1/no combat groups
     List<Widget> allOrderWidgets = [];
     // Create a list of OrderToggleButton widgets based on the order types in Orders
-    allOrderWidgets.addAll(List.generate(_orders.commandTokens, (index) => orderToggleSwitch(OrderType.CommandToken)));
+    // allOrderWidgets.addAll(List.generate(_orders.commandTokens, (index) => orderToggleSwitch(OrderType.CommandToken)));
     allOrderWidgets.addAll(List.generate(_orders.lieutenantOrders, (index) => orderToggleSwitch(OrderType.Lieutenant)));
     allOrderWidgets.addAll(List.generate(_orders.regularOrders, (index) => orderToggleSwitch(OrderType.Regular)));
     allOrderWidgets.addAll(List.generate(_orders.irregularOrders, (index) => orderToggleSwitch(OrderType.Irregular)));
     allOrderWidgets.addAll(List.generate(_orders.impetuousOrder, (index) => orderToggleSwitch(OrderType.Impetuous)));
 
     // Determine the number of columns needed based on the total number of orders
-    int numberOfColumns = (allOrderWidgets.length / 8).ceil();
+    int numberOfColumns = (allOrderWidgets.length / tokensPerColumn).ceil();
     // debugPrint("The number of columns is: $numberOfColumns");
 
     // Create a list to hold the widgets for each column
@@ -120,8 +134,8 @@ class _PlayScreenState extends State<PlayScreen> {
     // Generate columns
     for (int i = 0; i < numberOfColumns; i++) {
       // Determine the start and end index for each column
-      int startIndex = i * 8;
-      int endIndex = min((i + 1) * 8, allOrderWidgets.length);
+      int startIndex = i * tokensPerColumn;
+      int endIndex = min((i + 1) * tokensPerColumn, allOrderWidgets.length);
 
       // Extract orders for the current column
       List<Widget> ordersInCurrentColumn = allOrderWidgets.sublist(startIndex, endIndex);
@@ -142,7 +156,6 @@ class _PlayScreenState extends State<PlayScreen> {
       );
     }
     
-
     return Scrollbar(
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,

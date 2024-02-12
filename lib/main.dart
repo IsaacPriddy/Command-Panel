@@ -21,6 +21,10 @@ void main() {
 //    - Change my set orders to have two groups of the buttons, one for group 1 and one for group 2
 //    - Make it so that the command tokens are the top row, the next section is group 1, and the
 //      section after that is group 2. BUT, if there is only one group then use all the space for it.
+//    - Thinking I may forgo this unless it comes up later as, techincally, a user could have as many
+//      as 15 combat groups with 1 model per group. This is insane and I don't want to have to code for
+//      it either, so will make the assumption that users can keep track of their orders via their army
+//      list.
 //  8. A way to keep score maybe?
 //  9. A library of the hidden objective cards? (Might be stepping on companies toes if I do this though)
 //  10. Do not allow users to unToggle the buttons (except command tokens) without pressing the reset button
