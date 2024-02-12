@@ -102,6 +102,7 @@ class OrderToggleButtonState extends State<OrderToggleButton> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+    Color toggleColor = Colors.blueGrey.shade200; // So I can change the isToggled value in one spot // Was Colors.grey.shade700
 
     return GestureDetector(
       onTap: () {
@@ -129,7 +130,7 @@ class OrderToggleButtonState extends State<OrderToggleButton> {
                 height: screenHeight * 0.064, // was 40
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.0),
-                  color: isToggled ? widget.backgroundColor : Colors.grey.shade700, // MAKES THE WHOLE BACKGROUND OF IMAGE SAME COLOR
+                  color: isToggled ? widget.backgroundColor : toggleColor, // MAKES THE WHOLE BACKGROUND OF IMAGE SAME COLOR
                 ),
               ),
             ),
@@ -141,7 +142,7 @@ class OrderToggleButtonState extends State<OrderToggleButton> {
                 height: screenHeight * 0.064, // was 40
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.0),
-                  color: isToggled ? widget.backgroundColor : Colors.grey.shade700,
+                  color: isToggled ? widget.backgroundColor : toggleColor,
                 ),
                 child: Center(
                   child: Image.asset(

@@ -11,6 +11,7 @@ class CommonWidgets {
         borderRadius: BorderRadius.circular(10),
       ),
       foregroundColor: Colors.black,
+      // TODO: Possibly change the button color to match the bottom AppBar
       backgroundColor: Colors.blueGrey.shade200,
       textStyle: TextStyle(
         fontSize: fontSize,

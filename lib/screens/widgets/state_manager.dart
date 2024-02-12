@@ -1,5 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 // UNUSED CURRENTLY, HOPEFULLY WILL BE USED LATER
+// TODO: Delete this file or get saves between instances working
 
 
 class AppStateManager {

@@ -33,7 +33,7 @@ class PlayScreen extends StatefulWidget {
 class _PlayScreenState extends State<PlayScreen> {
   // VARIABLES, INITIALIZERS AND UPPDATERS
   final List<GlobalKey<OrderToggleButtonState>> _toggleButtonKeys = [];
-  Orders _orders = Orders();  // Creates a copy of the default orders
+  final Orders _orders = Orders();  // Creates a copy of the default orders
   
   @override
   void initState() {
@@ -73,7 +73,8 @@ class _PlayScreenState extends State<PlayScreen> {
       ),
       bottomNavigationBar: Container(
         // Here to be used for whatever I might need in the future
-        decoration: BoxDecoration(color: Colors.blueGrey.shade500),
+        // TODO: Possibly change the bottom box color
+        decoration: BoxDecoration(color: Colors.blueGrey.shade200), // Was blueGrey.shade500, then Color.fromRGBO(232, 122, 22, 1.0)
         height: screenHeight * 0.08,
       ),
     );

@@ -23,14 +23,14 @@ class MyApp extends StatefulWidget {
   AppState createState() => AppState();
 }
 
-class AppState extends State<MyApp> {
-
+class AppState extends State<MyApp> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Command Panel',
       theme: ThemeData(
-        appBarTheme: AppBarTheme(color: Colors.blueGrey.shade500),
+        // TODO: Stick with BlueGrey or embrace this new Orange
+        appBarTheme: const AppBarTheme(color: Color.fromRGBO(232, 122, 22, 1.0)), // Was blueGrey.shade500, then orange.shade600
         scaffoldBackgroundColor: Colors.white,
         textTheme: const TextTheme(
           titleLarge: TextStyle(
