@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'widgets/order_toggle_button.dart';
 import 'widgets/set_button.dart';
-import 'widgets/common_widgets.dart';
+import 'widgets/common_widgets.dart'; // For button style
 import 'dart:math';
 
 class Orders {
@@ -84,7 +84,7 @@ class _PlayScreenState extends State<PlayScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const SizedBox(height: 8.0), // SPACER
+        SizedBox(height: h * 0.014), // SPACER, WAS 12.0
         // THE SET AND RESET BUTTON
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -93,7 +93,7 @@ class _PlayScreenState extends State<PlayScreen> {
             resetToggleButtons(h*0.8, w),
           ],
         ),
-        const SizedBox(height: 16.0), // SPACER
+        SizedBox(height: h * 0.014), // SPACER, WAS 12.0
         // THE COMMAND TOKENS
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -105,9 +105,11 @@ class _PlayScreenState extends State<PlayScreen> {
             ),
           ],
         ),
+        SizedBox(height: h * 0.004),  // SPACER
         Divider(thickness: 4.0,indent: 16.0, endIndent: 16.0, color: Colors.blueGrey.shade200,), // WAS const SizedBox(height: 16.0),
+        SizedBox(height: h * 0.004),  // SPACER
         // THE TOGGLE BUTTONS ROW/COLUMNS
-        // createToggleRows(), 
+        // createToggleRows(), // If changed in the future: Change this so it creates rows instead of columns so that a user can scroll down instead of across
         createToggleColumns(),
       ],
     );
@@ -126,7 +128,6 @@ class _PlayScreenState extends State<PlayScreen> {
 
     // Determine the number of columns needed based on the total number of orders
     int numberOfColumns = (allOrderWidgets.length / tokensPerColumn).ceil();
-    // debugPrint("The number of columns is: $numberOfColumns");
 
     // Create a list to hold the widgets for each column
     List<Widget> columns = [];
@@ -142,9 +143,10 @@ class _PlayScreenState extends State<PlayScreen> {
 
       // Create a column with orders and spacers
       List<Widget> columnChildren = [];
+      double spaceBetweenToggles = MediaQuery.of(context).size.height * 0.020;
       for (var orderWidget in ordersInCurrentColumn) {
         columnChildren.add(orderWidget);
-        columnChildren.add(const SizedBox(height: 14.0)); // Spacer
+        columnChildren.add(SizedBox(height: spaceBetweenToggles)); // Spacer, WAS 14
       }
 
       // Add the column to the list of columns
