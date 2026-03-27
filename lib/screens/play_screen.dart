@@ -4,6 +4,7 @@ import 'widgets/set_button.dart';
 import 'widgets/common_widgets.dart'; // For button style
 import 'dart:math';
 
+
 class Orders {
   int commandTokens = 0; // Default number of these is 4, set button creates their default
   int lieutenantOrders = 0;
@@ -30,7 +31,7 @@ class PlayScreen extends StatefulWidget {
   _PlayScreenState createState() => _PlayScreenState();
 }
 
-class _PlayScreenState extends State<PlayScreen> {
+class _PlayScreenState extends State<PlayScreen> with WidgetsBindingObserver {
   // VARIABLES, INITIALIZERS AND UPPDATERS
   final List<GlobalKey<OrderToggleButtonState>> _toggleButtonKeys = [];
   final Orders _orders = Orders();  // Creates a copy of the default orders
@@ -38,7 +39,7 @@ class _PlayScreenState extends State<PlayScreen> {
   @override
   void initState() {
     super.initState();
-    updateToggleKeys();
+    WidgetsBinding.instance.addObserver(this); // Register the observer
   }
 
   void updateToggleKeys() {
@@ -63,17 +64,15 @@ class _PlayScreenState extends State<PlayScreen> {
       ),
       body: Container(
         decoration: const BoxDecoration(
-          // Decoration for background image
           image: DecorationImage(
             image: AssetImage("assets/logos/logo_15.png"), 
             fit: BoxFit.contain,
           ),
         ),
-        child: playScreenMainBody(screenHeight, screenWidth)
+        child: playScreenMainBody(screenHeight, screenWidth),
       ),
       bottomNavigationBar: Container(
         // Here to be used for whatever I might need in the future
-        // TODO: Possibly change the bottom box color
         decoration: BoxDecoration(color: Colors.blueGrey.shade200), // Was blueGrey.shade500, then Color.fromRGBO(232, 122, 22, 1.0)
         height: screenHeight * 0.08,
       ),
@@ -89,8 +88,8 @@ class _PlayScreenState extends State<PlayScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            setButton(h*0.8, w, context, () {}, _orders, () {setState(() {});}),
-            resetToggleButtons(h*0.8, w),
+            setButton(h*1.0, w, context, () {}, _orders, () {setState(() {});}),
+            resetToggleButtons(h*1.0, w),
           ],
         ),
         SizedBox(height: h * 0.014), // SPACER, WAS 12.0
@@ -212,7 +211,7 @@ class _PlayScreenState extends State<PlayScreen> {
 
     return OrderToggleButton(
       // key: key,//As long as this is in here, reset also resets command tokens instead of leaving them be
-      defaultValue: true,
+      defaultValue: _orders.commandTokens > 0,
       normalImage: "assets/tokens/command.png",
       greyImage: "assets/tokens/command_grey.png",
       orderType: OrderType.CommandToken,
@@ -226,7 +225,7 @@ class _PlayScreenState extends State<PlayScreen> {
 
     return OrderToggleButton(
       key: key, // Add key here
-      defaultValue: true,
+      defaultValue: _orders.lieutenantOrders > 0,
       normalImage: "assets/tokens/lieutenant.png",
       greyImage: "assets/tokens/lieutenant_grey.png",
       orderType: OrderType.Lieutenant,
@@ -240,7 +239,7 @@ class _PlayScreenState extends State<PlayScreen> {
 
     return OrderToggleButton(
       key: key, // Add key here
-      defaultValue: true,
+      defaultValue: _orders.regularOrders > 0,
       normalImage: "assets/tokens/regular.png",
       greyImage: "assets/tokens/regular_grey.png",
       orderType: OrderType.Regular,
@@ -254,7 +253,7 @@ class _PlayScreenState extends State<PlayScreen> {
 
     return OrderToggleButton(
       key: key, // Add key here
-      defaultValue: true,
+      defaultValue: _orders.irregularOrders > 0,
       normalImage: "assets/tokens/irregular.png",
       greyImage: "assets/tokens/irregular_grey.png",
       orderType: OrderType.Irregular,
@@ -268,7 +267,7 @@ class _PlayScreenState extends State<PlayScreen> {
 
     return OrderToggleButton(
       key: key,// Add key here
-      defaultValue: true,
+      defaultValue: _orders.impetuousOrder > 0,
       normalImage: "assets/tokens/impetuous.png",
       greyImage: "assets/tokens/impetuous_grey.png",
       orderType: OrderType.Impetuous,

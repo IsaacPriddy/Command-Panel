@@ -101,23 +101,24 @@ class _SetScreenState extends State<_SetScreen> {
             // THE SET ORDERS BUTTON
             ElevatedButton(
               onPressed: () {
-                // Handle set button press
-                // Update the original orders
-                _originalOrders = Orders.copy(widget.orders);
-                // Check if there are any other orders than command tokens
-                bool hasOtherOrders =
-                    widget.orders.lieutenantOrders > 0 ||
-                    widget.orders.regularOrders > 0 ||
-                    widget.orders.irregularOrders > 0 ||
-                    widget.orders.impetuousOrder > 0;
-                // Set command tokens based on the presence of other orders
-                widget.orders.commandTokens = hasOtherOrders ? 4 : 0;
+                setState(() {
+                  // Update the original orders
+                  _originalOrders = Orders.copy(widget.orders);
+                  // Update command tokens based on the presence of other orders
+                  bool hasOtherOrders =
+                      widget.orders.lieutenantOrders > 0 ||
+                      widget.orders.regularOrders > 0 ||
+                      widget.orders.irregularOrders > 0 ||
+                      widget.orders.impetuousOrder > 0;
+                  // Set command tokens based on the presence of other orders
+                  widget.orders.commandTokens = hasOtherOrders ? 4 : 0;
 
-                // Invoke a callback
-                widget.onSetPressed?.call();
+                  // Invoke the callback to update the PlayScreen widget
+                  widget.onSetPressed?.call();
 
-                // Dismiss the dialog
-                Navigator.pop(context);
+                  // Dismiss the dialog
+                  Navigator.pop(context);
+                });
               },
               style: commonWidgets.customButtonStyle(height: screenWidth * 1.2),
               child: const Text('Set'),

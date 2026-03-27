@@ -16,8 +16,8 @@ void main() {
 //      the plus and minus buttons are annoying to continuously tap...
 //      - Tried a tap in field, it sucked. On the plus side, fixed a bug with the popup screen
 //  5. Make it so that the state of the app is saved when the app is closed and opened again
-//  6. Connect the AD service thing to my bottom appbar
-//  7. What should I do if the user has two combat groups?
+//  6. Connect the Ad service thing to my bottom appbar
+//  7. (FAILED v1.0) What should I do if the user has two combat groups?
 //    - Change my set orders to have two groups of the buttons, one for group 1 and one for group 2
 //    - Make it so that the command tokens are the top row, the next section is group 1, and the
 //      section after that is group 2. BUT, if there is only one group then use all the space for it.
